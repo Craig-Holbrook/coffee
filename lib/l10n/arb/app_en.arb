@@ -43,5 +43,10 @@
     "noFavoritesFeedback": "You have no favorites",
     "@noFavoritesFeedback": {
         "description": "Text shown on favorites screen before any favorites are added"
+    },
+
+    "errorLoadingImg":"Error loading image",
+    "@errorLoadingImg": {
+        "description": "Text shown when error occurs while attempting to load image from storage"
     }
 }

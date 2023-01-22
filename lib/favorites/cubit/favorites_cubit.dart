@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:coffee_repository/coffee_repository.dart';
@@ -33,8 +34,14 @@ class FavoritesCubit extends Cubit<FavoritesState> with HydratedMixin {
     _coffeeStorageRepository.removeImage(removedId);
   }
 
-  File getImgFromStorage(String id) {
-    return _coffeeStorageRepository.getImage(id);
+  File? getImgFromStorage(String id) {
+    try {
+      final file = _coffeeStorageRepository.getImage(id);
+      return file;
+    } catch (e) {
+      log('Error getting file from storage $e');
+    }
+    return null;
   }
 
   @override

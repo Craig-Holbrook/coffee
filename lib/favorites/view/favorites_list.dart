@@ -24,36 +24,19 @@ class FavoritesList extends StatelessWidget {
             itemCount: favorites.length,
             itemBuilder: (context, index) {
               final id = favorites[index];
-              return CoffeeImageContainer(
-                coffeeImage: Image.file(
-                  context.read<FavoritesCubit>().getImgFromStorage(id),
-                ),
-                remove: true,
-                index: index,
-              );
+              final file = context.read<FavoritesCubit>().getImgFromStorage(id);
+              return file != null
+                  ? CoffeeImageContainer(
+                      coffeeImage: Image.file(file),
+                      remove: true,
+                      index: index,
+                    )
+                  : SizedBox(
+                      width: double.infinity,
+                      height: 30,
+                      child: Center(child: Text(l10n.errorLoadingImg)),
+                    );
             },
           );
   }
 }
-
-
-    // final width = MediaQuery.of(context).size.width;
- // FutureBuilder(
-              //   future: context.read<FavoritesCubit>().getImgFromStorage(id),
-              //   builder: (context, snapshot) {
-              //     return snapshot.connectionState == ConnectionState.done
-              //         ? CoffeeImageContainer(
-              //             coffeeImage: Image.file(snapshot.data!),
-              //             remove: true,
-              //             index: index,
-              //           )
-              //         : SizedBox(
-              //             width: width,
-              //             height: width + 55,
-              //             child: const Center(
-              //               child: CircularProgressIndicator(),
-              //             ),
-              //           );
-              //   },
-              // );
-
