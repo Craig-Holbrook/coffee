@@ -1,0 +1,47 @@
+{
+    "@@locale": "en",
+    "generateButtonTitle": "Generate",
+    "@generateButtonTitle": {
+        "description": "Text shown in Generate Button"
+    },
+
+    "generateBottomNav": "Generate",
+    "@generateBottomNav": {
+        "description": "Text under the icon for generate feature in the bottom navigation"
+    },
+
+    "generateNavTitle": "Generate",
+    "@generateNavTitle": {
+        "description": "Generate navigation title"
+    },
+
+    "favoritesBottomNav": "Favorites",
+    "@favoritesBottomNav": {
+        "description": "Text under the icon for generate feature in the bottom navigation"
+    },
+
+    "favoritesNavTitle": "Favorites",
+    "@favoritesNavTitle": {
+        "description": "Favorites navigation title"
+    },
+
+    "initialGenerateString": "Generate some coffee!",
+    "@initialGenerateString": {
+        "description": "Text shown before generating coffee img"
+    },
+
+    "addedToFavoritesSnackBar": "Coffee image added to favorites",
+    "@addedToFavoritesSnackBar": {
+        "description": "Text shown in snack bar after favoriting coffee img"
+    },
+
+    "generateErrorMsgFeedback": "Error, please try again later",
+    "@generateErrorMsgFeedback": {
+        "description": "Text shown when api call to get coffee fails"
+    },
+
+    "noFavoritesFeedback": "You have no favorites",
+    "@noFavoritesFeedback": {
+        "description": "Text shown on favorites screen before any favorites are added"
+    }
+}
