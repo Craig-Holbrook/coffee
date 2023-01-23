@@ -62,6 +62,21 @@ void main() {
         ).called(1),
       );
 
+      group('resetCurrentFavorited', () {
+        blocTest<FavoritesCubit, FavoritesState>(
+          'tests currentFavorited is reset to false',
+          build: () => FavoritesCubit(coffeeStorageRepository),
+          seed: () => const FavoritesState(
+            idsForFavorites: ['123'],
+            currentIsFavorited: true,
+          ),
+          act: (cubit) => cubit.resetCurrentFavorited(),
+          expect: () => <FavoritesState>[
+            const FavoritesState(idsForFavorites: ['123']),
+          ],
+        );
+      });
+
       test('emits state with new id', () {
         when(
           () => coffeeStorageRepository.saveImage(any(), coffeePicture.bytes),
@@ -98,10 +113,38 @@ void main() {
           );
         },
         build: () => FavoritesCubit(coffeeStorageRepository),
-        seed: () => const FavoritesState(idsForFavorites: ['123', '324']),
+        seed: () => const FavoritesState(
+          idsForFavorites: ['123', '324'],
+          currentIsFavorited: true,
+        ),
         act: (cubit) => cubit.removeFavorite(0),
         expect: () => <FavoritesState>[
-          const FavoritesState(idsForFavorites: ['324']),
+          const FavoritesState(
+            idsForFavorites: ['324'],
+            currentIsFavorited: true,
+          ),
+        ],
+      );
+
+      blocTest<FavoritesCubit, FavoritesState>(
+        '''
+new state is emitted without the removed id but it was the
+last image so user should be able to go back and re favorite it''',
+        setUp: () {
+          when(() => coffeeStorageRepository.removeImage('324')).thenAnswer(
+            (_) => Future.value(),
+          );
+        },
+        build: () => FavoritesCubit(coffeeStorageRepository),
+        seed: () => const FavoritesState(
+          idsForFavorites: ['123', '324'],
+          currentIsFavorited: true,
+        ),
+        act: (cubit) => cubit.removeFavorite(1),
+        expect: () => <FavoritesState>[
+          const FavoritesState(
+            idsForFavorites: ['123'],
+          ),
         ],
       );
     });

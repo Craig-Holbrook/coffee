@@ -24,13 +24,13 @@ class _CoffeePageState extends State<CoffeePage> {
         titleTextStyle: Theme.of(context).textTheme.headline5,
       ),
       body: const [
-        GenerateCoffee(),
-        FavoritesList(),
+        HomeScreen(),
+        FavoritesScreen(),
       ][_selectedIndex],
       bottomNavigationBar: NavigationBar(
         destinations: [
           NavigationDestination(
-            icon: const Icon(Icons.add),
+            icon: const Icon(Icons.home),
             label: l10n.generateBottomNav,
           ),
           NavigationDestination(

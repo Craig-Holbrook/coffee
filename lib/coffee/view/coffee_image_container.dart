@@ -1,5 +1,4 @@
-import 'package:coffee/coffee/coffee.dart';
-import 'package:coffee/favorites/cubit/favorites_cubit.dart';
+import 'package:coffee/favorites/favorites.dart';
 import 'package:coffee/l10n/l10n.dart';
 import 'package:coffee_repository/coffee_repository.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +20,6 @@ class CoffeeImageContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       child: Column(
@@ -34,31 +32,91 @@ class CoffeeImageContainer extends StatelessWidget {
               child: coffeeImage,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 10, left: 10, top: 10),
-            child: IconButton(
-              splashRadius: 24,
-              constraints: const BoxConstraints(maxHeight: 36),
-              icon: Icon(
-                remove ? Icons.delete_outline : Icons.favorite_border_outlined,
-              ),
-              onPressed: () {
-                if (remove) {
-                  context.read<FavoritesCubit>().removeFavorite(index!);
-                } else {
-                  context.read<FavoritesCubit>().addFavorite(coffeePicture!);
-                  context.read<CoffeeCubit>().reset();
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(l10n.addedToFavoritesSnackBar),
-                      duration: const Duration(seconds: 1),
-                    ),
-                  );
+          if (remove)
+            DeleteButton(index: index!)
+          else
+            BlocBuilder<FavoritesCubit, FavoritesState>(
+              buildWhen: (previous, current) =>
+                  previous.currentIsFavorited != current.currentIsFavorited,
+              builder: (context, state) {
+                if (state.currentIsFavorited) {
+                  return const FavoritesLabel();
                 }
+                return FavoriteButton(coffeePicture: coffeePicture!);
               },
-            ),
-          )
+            )
         ],
+      ),
+    );
+  }
+}
+
+class FavoritesLabel extends StatelessWidget {
+  const FavoritesLabel({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20),
+      child: Text(
+        l10n.favorited,
+        style: const TextStyle(
+          fontStyle: FontStyle.italic,
+          color: Colors.black54,
+        ),
+      ),
+    );
+  }
+}
+
+class FavoriteButton extends StatelessWidget {
+  const FavoriteButton({
+    super.key,
+    required this.coffeePicture,
+  });
+
+  final CoffeePicture coffeePicture;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      child: IconButton(
+        splashRadius: 24,
+        constraints: const BoxConstraints(maxHeight: 36),
+        icon: const Icon(
+          Icons.favorite_border_outlined,
+        ),
+        onPressed: () {
+          context.read<FavoritesCubit>().addFavorite(coffeePicture);
+        },
+      ),
+    );
+  }
+}
+
+class DeleteButton extends StatelessWidget {
+  const DeleteButton({
+    super.key,
+    required this.index,
+  });
+
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      child: IconButton(
+        splashRadius: 24,
+        constraints: const BoxConstraints(maxHeight: 36),
+        icon: const Icon(
+          Icons.delete_outline,
+        ),
+        onPressed: () {
+          context.read<FavoritesCubit>().removeFavorite(index);
+        },
       ),
     );
   }

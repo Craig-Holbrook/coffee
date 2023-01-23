@@ -28,7 +28,7 @@ void main() {
     test('toString functionality', () {
       expect(
         const FavoritesState(idsForFavorites: ['456']).toString(),
-        'FavoritesState(idsForFavorites: [456])',
+        'FavoritesState(idsForFavorites: [456], currentIsFavorited: false)',
       );
     });
   });

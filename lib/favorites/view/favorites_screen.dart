@@ -4,12 +4,14 @@ import 'package:coffee/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class FavoritesList extends StatelessWidget {
-  const FavoritesList({super.key});
+class FavoritesScreen extends StatelessWidget {
+  const FavoritesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    final textTheme = Theme.of(context).textTheme;
+
     final favorites = context.select(
       (FavoritesCubit cubit) => cubit.state.idsForFavorites,
     );
@@ -17,7 +19,12 @@ class FavoritesList extends StatelessWidget {
         ? Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Center(child: Text(l10n.noFavoritesFeedback)),
+              Center(
+                child: Text(
+                  l10n.noFavoritesFeedback,
+                  style: textTheme.bodyLarge,
+                ),
+              ),
             ],
           )
         : ListView.builder(

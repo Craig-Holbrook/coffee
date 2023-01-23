@@ -38,7 +38,7 @@ Future<void> bootstrap(BootstrapBuilder builder) async {
   Bloc.observer = AppBlocObserver();
 
   await runZonedGuarded(
-    () async => runApp(builder(CoffeeLocalStorageApi(dir))),
+    () async => runApp(builder(CoffeeLocalStorageApi(directory: dir))),
     (error, stackTrace) => log(error.toString(), stackTrace: stackTrace),
   );
 }

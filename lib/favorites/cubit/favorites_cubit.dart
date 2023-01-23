@@ -22,15 +22,29 @@ class FavoritesCubit extends Cubit<FavoritesState> with HydratedMixin {
     emit(
       FavoritesState(
         idsForFavorites: [...state.idsForFavorites, id],
+        currentIsFavorited: true,
       ),
     );
     await _coffeeStorageRepository.saveImage(id, coffeePicture.bytes);
   }
 
+  void resetCurrentFavorited() {
+    emit(
+      FavoritesState(idsForFavorites: [...state.idsForFavorites]),
+    );
+  }
+
   void removeFavorite(int index) {
     final favs = [...state.idsForFavorites];
+    final currentIsStillFavorited = favs.length - 1 != index;
     final removedId = favs.removeAt(index);
-    emit(FavoritesState(idsForFavorites: favs));
+
+    emit(
+      FavoritesState(
+        idsForFavorites: favs,
+        currentIsFavorited: currentIsStillFavorited,
+      ),
+    );
     _coffeeStorageRepository.removeImage(removedId);
   }
 

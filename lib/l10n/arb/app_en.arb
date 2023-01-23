@@ -1,16 +1,16 @@
 {
     "@@locale": "en",
-    "generateButtonTitle": "Generate",
+    "generateButtonTitle": "Load Coffee",
     "@generateButtonTitle": {
         "description": "Text shown in Generate Button"
     },
 
-    "generateBottomNav": "Generate",
+    "generateBottomNav": "Home",
     "@generateBottomNav": {
         "description": "Text under the icon for generate feature in the bottom navigation"
     },
 
-    "generateNavTitle": "Generate",
+    "generateNavTitle": "Very Good Coffee ☕",
     "@generateNavTitle": {
         "description": "Generate navigation title"
     },
@@ -25,8 +25,13 @@
         "description": "Favorites navigation title"
     },
 
-    "initialGenerateString": "Generate some coffee!",
-    "@initialGenerateString": {
+    "initialGenerateTitle": "Welcome to VGC",
+    "@initialGenerateTitle": {
+        "description": "Text shown before generating coffee img"
+    },
+
+    "initialGenerateSubtitle": "Tap button below to get started",
+    "@initialGenerateSubtitle": {
         "description": "Text shown before generating coffee img"
     },
 
@@ -43,6 +48,11 @@
     "noFavoritesFeedback": "You have no favorites",
     "@noFavoritesFeedback": {
         "description": "Text shown on favorites screen before any favorites are added"
+    },
+
+    "favorited": "Favorited",
+    "@favorited": {
+        "description": "Text shown in place of favorite button after img is favorited"
     },
 
     "errorLoadingImg":"Error loading image",
