@@ -35,11 +35,6 @@
         "description": "Text shown before generating coffee img"
     },
 
-    "addedToFavoritesSnackBar": "Coffee image added to favorites",
-    "@addedToFavoritesSnackBar": {
-        "description": "Text shown in snack bar after favoriting coffee img"
-    },
-
     "generateErrorMsgFeedback": "Error, please try again later",
     "@generateErrorMsgFeedback": {
         "description": "Text shown when api call to get coffee fails"

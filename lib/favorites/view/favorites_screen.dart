@@ -9,24 +9,11 @@ class FavoritesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = context.l10n;
-    final textTheme = Theme.of(context).textTheme;
-
     final favorites = context.select(
       (FavoritesCubit cubit) => cubit.state.idsForFavorites,
     );
     return favorites.isEmpty
-        ? Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Center(
-                child: Text(
-                  l10n.noFavoritesFeedback,
-                  style: textTheme.bodyLarge,
-                ),
-              ),
-            ],
-          )
+        ? const NoFavoritesFeedback()
         : ListView.builder(
             itemCount: favorites.length,
             itemBuilder: (context, index) {
@@ -38,12 +25,44 @@ class FavoritesScreen extends StatelessWidget {
                       remove: true,
                       index: index,
                     )
-                  : SizedBox(
-                      width: double.infinity,
-                      height: 30,
-                      child: Center(child: Text(l10n.errorLoadingImg)),
-                    );
+                  : const ErrorLoadingImageFeedback();
             },
           );
+  }
+}
+
+class NoFavoritesFeedback extends StatelessWidget {
+  const NoFavoritesFeedback({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    final textTheme = Theme.of(context).textTheme;
+
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Center(
+          child: Text(
+            l10n.noFavoritesFeedback,
+            style: textTheme.bodyLarge,
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class ErrorLoadingImageFeedback extends StatelessWidget {
+  const ErrorLoadingImageFeedback({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+    return SizedBox(
+      width: double.infinity,
+      height: 30,
+      child: Center(child: Text(l10n.errorLoadingImg)),
+    );
   }
 }

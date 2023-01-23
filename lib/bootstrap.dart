@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:coffee_local_storage_api/coffee_local_storage_api.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
@@ -26,6 +27,8 @@ typedef BootstrapBuilder = Widget Function(
 
 Future<void> bootstrap(BootstrapBuilder builder) async {
   WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
   final dir = await getApplicationDocumentsDirectory();
   HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory: dir,
