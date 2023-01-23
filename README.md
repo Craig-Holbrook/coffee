@@ -5,7 +5,7 @@
 ## Getting Started
 
 - Build with very_good_cli
-- Can be launched with: flutter run --flavor development
+- Can be launched with: flutter run --flavor development  
   or through IDE (vscode run shortcut, etc.)
 
 ## Architecture
@@ -13,10 +13,10 @@
 Taking inspiration from Very Good Ventures's open source material, the app uses bloc state management and
 the code is layered in presentation, domain, and data layers.
 
-- Coffee feature
+- Coffee feature  
   UI <--> CoffeeCubit <--> CoffeeRepository <--> CoffeeApi
 
-- Favorites feature
+- Favorites feature  
   UI <--> FavoritesCubit <--> CoffeeStorageRepository <--> CoffeeStorageApi <--> CoffeeLocalStorageApi
 
 The CoffeeLocalStorageApi implements an abstract class exposed by the CoffeeStorageApi.
