@@ -8,7 +8,7 @@ environment:
   flutter: 3.3.10
 
 dependencies:
-  bloc: ^8.1.0
+  bloc: ^8.1.1
   coffee_local_storage_api:
     path: packages/coffee_local_storage_api
   coffee_repository:
